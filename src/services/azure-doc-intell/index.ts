@@ -13,7 +13,7 @@ export class AzureDocIntellService {
   }
 
   async _extractText(reqBody: IRequestBody): Promise<IOutput<string>> {
-    console.debug('AzureDocIntellService._extractText()');
+    //console.debug('AzureDocIntellService._extractText()');
     try {
       const path = '/documentModels/{modelId}:analyze';
       const pathParams = 'prebuilt-read';
@@ -47,17 +47,17 @@ export class AzureDocIntellService {
   }
 
   async extractTextFromBase64(base64Source: string, locale = 'en-US'): Promise<IOutput<string>> {
-    console.debug('AzureDocIntellService.extractTextFromBase64()');
+    //console.debug('AzureDocIntellService.extractTextFromBase64()');
     return this._extractText({ body: { base64Source }, queryParameters: { locale }, contentType: 'application/json' });
   }
 
   async extractTextFromUrl(urlSource: string, locale = 'en-US'): Promise<IOutput<string>> {
-    console.debug('AzureDocIntellService.extractTextFromUrl()');
+    //console.debug('AzureDocIntellService.extractTextFromUrl()');
     return this._extractText({ body: { urlSource }, queryParameters: { locale }, contentType: 'application/json' });
   }
 
   async extractTextFromBuffer(body: Buffer, locale = 'en-US'): Promise<IOutput<string>> {
-    console.debug('AzureDocIntellService.extractTextFromBuffer()');
+    //console.debug('AzureDocIntellService.extractTextFromBuffer()');
     return this._extractText({ body,  queryParameters: { locale }, contentType: 'application/octet-stream' });
   }
 }

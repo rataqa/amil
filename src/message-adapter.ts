@@ -14,6 +14,14 @@ export class MessageAdapter<TPayload = IMsgPayload> implements IMessageAdapter<T
     return this.msg.properties.headers?.[key] || '';
   }
 
+  fileNameHeader() {
+    return this.header('fileName');
+  }
+
+  fileTypeHeader() {
+    return this.header('fileType');
+  }
+
   formatHeader() {
     return this.header('format').toLowerCase() || 'json';
   }

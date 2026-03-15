@@ -13,7 +13,7 @@ export function catchErrMsg(func: Function): string {
   throw new Error('Expected error was not thrown');
 }
 
-export function makeMsg(content: Buffer, format = 'json') {
+export function makeMsg(content: Buffer, format = 'json', fileName = '', fileType = '') {
   const correlationId = randomUUID();
   const messageId = randomUUID();
   return {
@@ -28,6 +28,8 @@ export function makeMsg(content: Buffer, format = 'json') {
     properties: {
       headers: {
         format,
+        fileName,
+        fileType,
         'x-correlation-id': correlationId,
       },
       contentType: 'buffer',
