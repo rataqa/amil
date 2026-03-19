@@ -35,14 +35,16 @@ export interface IMsgPayload {
 }
 
 export interface IMsgHttpCallback {
-  method?: 'POST';
-  url    : string;
-  headers: IObjectWithStrings;
+  // method is always post
+  url         : string;
+  headers?    : IObjectWithStrings;
+  mergeOutput?: boolean;
 }
 
 export interface IMsgAmqpCallback {
-  queue  : string;
-  headers: IObjectWithStrings;
+  queue       : string;
+  headers?    : IObjectWithStrings;
+  mergeOutput?: boolean;
 }
 
 export interface IMsgFile {

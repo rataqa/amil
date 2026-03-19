@@ -1,6 +1,6 @@
 {
   "name": "@rataqa/amil",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Common workers that can integrate with AMQP broker",
   "type": "commonjs",
   "main": "dist/index.js",
