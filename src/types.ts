@@ -2,6 +2,7 @@ import amqp from 'amqplib';
 
 export interface IAmil<TPayload = IMsgPayload, TSuccess = any>  {
   work(msgAdapter: IMessageAdapter<TPayload>): Promise<IOutput<TSuccess>>;
+  stop?: () => Promise<void>;
 }
 
 // alias
@@ -34,14 +35,16 @@ export interface IMsgPayload {
 }
 
 export interface IMsgHttpCallback {
-  method?: 'POST';
-  url    : string;
-  headers: IObjectWithStrings;
+  // method is always post
+  url         : string;
+  headers?    : IObjectWithStrings;
+  mergeOutput?: boolean;
 }
 
 export interface IMsgAmqpCallback {
-  queue  : string;
-  headers: IObjectWithStrings;
+  queue       : string;
+  headers?    : IObjectWithStrings;
+  mergeOutput?: boolean;
 }
 
 export interface IMsgFile {
