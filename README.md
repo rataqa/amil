@@ -18,6 +18,10 @@ npm i
 # build
 npm run build
 
+# test
+npm run test
+npm run test:coverage
+
 # review/modify version number in package.json
 # login and publish
 npm login

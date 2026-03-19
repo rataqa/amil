@@ -7,7 +7,7 @@ export class AzureDocIntellService {
   constructor(
     protected endPoint: string = process.env['DOCUMENT_INTELLIGENCE_ENDPOINT'] || '',
     protected apiKey: string = process.env['DOCUMENT_INTELLIGENCE_API_KEY'] || '',
-    protected _client: IDocumentIntelligence = DocumentIntelligence(endPoint, { key: apiKey })
+    protected _client: IDocumentIntelligence = DocumentIntelligence(endPoint, { key: apiKey }),
   ) {
     // do nothing
   }
