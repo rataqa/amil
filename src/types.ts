@@ -2,6 +2,7 @@ import amqp from 'amqplib';
 
 export interface IAmil<TPayload = IMsgPayload, TSuccess = any>  {
   work(msgAdapter: IMessageAdapter<TPayload>): Promise<IOutput<TSuccess>>;
+  stop?: () => Promise<void>;
 }
 
 // alias
