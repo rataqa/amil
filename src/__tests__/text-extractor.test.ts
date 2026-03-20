@@ -4,8 +4,7 @@ import { describe, it } from 'node:test';
 
 import { TextExtractorUsingBuffer, TextExtractorUsingJson } from '../amil';
 import { AzureDocIntellService, OfficeParserService } from '../services';
-import { MessageAdapter } from '../message-adapter';
-import { base64 } from '../utils/strings';
+import { base64 } from '../utils';
 
 import * as F from './fixtures';
 import { makeMsg } from './utils';
@@ -66,16 +65,16 @@ describe('Amil workers', () => {
       file: { fileName: F.file1.fileName, contentBase64: F.file1.contentBase64 },
     });
     const payload1Buffer = base64.toBuffer(payload1Json);
-    const adJson1 = new MessageAdapter(makeMsg(payload1Buffer, 'json'));
+    const adJson1 = makeMsg(payload1Buffer, 'json');
 
     const bufferOfFile1 = base64.toBuffer(F.file1.contentBase64);
-    const adBuffer1 = new MessageAdapter<Buffer>(makeMsg(bufferOfFile1, 'buffer', F.file1.fileName));
+    const adBuffer1 = makeMsg(bufferOfFile1, 'buffer', F.file1.fileName);
 
     const payloadJson2 = JSON.stringify({
       file: { fileName: F.file2.fileName, contentBase64: F.file2.contentBase64 },
     });
     const buffer2Json = base64.toBuffer(payloadJson2);
-    const adJson2 = new MessageAdapter(makeMsg(buffer2Json, 'json'));
+    const adJson2 = makeMsg(buffer2Json, 'json');
 
     it('TextExtractorUsingJson should throw error with no service', () => {
       try {

@@ -1,9 +1,12 @@
-import { MessageAdapter } from '../../message-adapter';
-import { AzureDocIntellService, OfficeParserService } from '../../services';
-import { IAmil, IMsgPayload, IOutput } from '../../types';
-import { base64 } from '../../utils/strings';
+import { ConsumeMessage } from 'amqplib';
 
-export class TextExtractorUsingJson implements IAmil<IMsgPayload, string> {
+import { AzureDocIntellService, OfficeParserService } from '../../services';
+import { IAmil } from '../types';
+import { base64 } from '../../utils';
+import { IMsgContentWithFile } from './types';
+import { IOutput } from '../../types';
+
+export class TextExtractorUsingJson implements IAmil<string> {
 
   constructor(
     protected op: OfficeParserService | null = null,
@@ -12,12 +15,11 @@ export class TextExtractorUsingJson implements IAmil<IMsgPayload, string> {
     if (!op && !ai) throw new Error('office-parser or azure-doc-intell is required');
   }
 
-  async work(msgAdapter: MessageAdapter): Promise<IOutput<string>> {
-    let buffer: Buffer, fileName = '', contentBase64 = '';
-
-    const payload = msgAdapter.jsonPayload();
-    contentBase64 = payload.success?.file?.contentBase64 || '';
-    fileName = payload.success?.file?.fileName || '';
+  async work(msg: ConsumeMessage): Promise<IOutput<string>> {
+    let buffer: Buffer;
+    const input = JSON.parse(msg.content.toString('utf-8')) as IMsgContentWithFile;
+    const contentBase64 = input?.file?.contentBase64 || '';
+    const fileName = input?.file?.fileName || '';
     if (!contentBase64) {
       return { success: null, error: new Error('Empty contentBase64') };
     }

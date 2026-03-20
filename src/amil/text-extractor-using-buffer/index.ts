@@ -1,9 +1,11 @@
-import { MessageAdapter } from '../../message-adapter';
-import { AzureDocIntellService, OfficeParserService } from '../../services';
-import { IAmil, IOutput } from '../../types';
-import { base64 } from '../../utils/strings';
+import { ConsumeMessage } from 'amqplib';
 
-export class TextExtractorUsingBuffer implements IAmil<Buffer, string> {
+import { AzureDocIntellService, OfficeParserService } from '../../services';
+import { IAmil } from '../types';
+import { base64 } from '../../utils';
+import { IOutput } from '../../types';
+
+export class TextExtractorUsingBuffer implements IAmil<string> {
 
   constructor(
     protected op: OfficeParserService | null = null,
@@ -12,10 +14,10 @@ export class TextExtractorUsingBuffer implements IAmil<Buffer, string> {
     if (!op && !ai) throw new Error('office-parser or azure-doc-intell is required');
   }
 
-  async work(msgAdapter: MessageAdapter<Buffer>): Promise<IOutput<string>> {
-    const buffer = msgAdapter.bufferPayload();
+  async work(msg: ConsumeMessage): Promise<IOutput<string>> {
+    const buffer = msg.content;
     const contentBase64 = base64.fromBuffer(buffer);
-    const fileName = msgAdapter.fileNameHeader();
+    const fileName = msg.properties.headers?.['fileName'] || '';
 
     if (!contentBase64) {
       return { success: null, error: new Error('Empty contentBase64') };
