@@ -1,5 +1,5 @@
-import DocumentIntelligence, { AnalyzeOperationOutput, getLongRunningPoller, isUnexpected } from "@azure-rest/ai-document-intelligence";
-import { IOutput } from "../../types";
+import DocumentIntelligence, { AnalyzeOperationOutput, getLongRunningPoller, isUnexpected } from '@azure-rest/ai-document-intelligence';
+import { IOutput } from '../../types';
 
 type IDocumentIntelligence = ReturnType<typeof DocumentIntelligence>;
 
