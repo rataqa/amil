@@ -103,7 +103,8 @@ describe('Amil workers', () => {
     // it does not work yet
     it.skip('JSON - should work with base64 with office-parser - case 2', async () => {
       const result = await workerJsonOp.work(adJson2);
-      equal((result.success || '').includes('Sample PDF'), true);
+      const text = result.success?.file?.contentText || ''
+      equal(text.includes('Sample PDF'), true);
     });
 
     // it does not work yet

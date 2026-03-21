@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@azure-rest/ai-document-intelligence": "^1.1.0",
-    "@rataqa/sijil": "^1.0.3",
+    "@rataqa/sijil": "^1.0.4",
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^0.10.9",
     "officeparser": "^6.0.4"
