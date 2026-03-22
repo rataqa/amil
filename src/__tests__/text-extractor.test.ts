@@ -8,7 +8,6 @@ import { base64 } from '../utils';
 
 import * as F from './fixtures';
 import { makeMsg } from './utils';
-//import { catchErrMsg } from './utils';
 
 dotenv.config();
 
