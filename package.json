@@ -1,6 +1,6 @@
 {
   "name": "@rataqa/amil",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Common workers that can integrate with AMQP broker",
   "type": "commonjs",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@azure-rest/ai-document-intelligence": "^1.1.0",
-    "@rataqa/sijil": "^1.0.4",
+    "@rataqa/sijil": "^1.0.3",
     "amqp-connection-manager": "^5.0.0",
     "amqplib": "^0.10.9",
     "officeparser": "^6.0.4"
